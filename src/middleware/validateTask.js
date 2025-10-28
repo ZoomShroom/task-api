@@ -1,4 +1,4 @@
-import { body } from 'express-validator';
+import { body, param } from 'express-validator';
 import { checkValidationResults } from './handleValidationErrors.js';
 
 export const validateTask = [
@@ -18,3 +18,13 @@ export const validateTask = [
 
   checkValidationResults,
 ];
+
+export const validateId = [
+  param('id')
+    .optional()
+    .isNumeric()
+    .withMessage('ID must be a number'),
+
+  checkValidationResults,
+
+]

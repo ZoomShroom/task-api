@@ -10,3 +10,20 @@ export async function create(data) {
     data,
   });
 }
+
+export async function byId(id){ 
+  try{
+    const task = await prisma.task.findUnique({where: {id: Number(id)}});
+
+    if(!task){
+      const error = new Error('Task Not Found');
+      error.status = 404;
+      error.body = {error: 'Task not found'}; 
+      throw error;
+    }
+
+    return task; 
+  } catch(error){
+    throw error;
+  }
+}
